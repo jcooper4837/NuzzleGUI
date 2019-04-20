@@ -4,21 +4,52 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
 
 Board::Board() {
      mTimer = Timer::Instance();
-     float* listX = new float[3];
+	 mInput = InputManager::Instance();
+
+     listX = new float[9];
      listX[0] = 340.0f;
      listX[1] = 500.0f;
      listX[2] = 660.0f;
+	 listX[3] = 340.0f;
+	 listX[4] = 500.0f;
+	 listX[5] = 660.0f;
+	 listX[6] = 340.0f;
+	 listX[7] = 500.0f;
+	 listX[8] = 660.0f;
 
-     float* listY = new float[3];
+     listY = new float[9];
      listY[0] = 220.0f;
-     listY[1] = 420.0f;
-     listY[2] = 600.0f;
+     listY[3] = 420.0f;
+     listY[6] = 600.0f;
+	 listY[1] = 220.0f;
+	 listY[4] = 420.0f;
+	 listY[7] = 600.0f;
+	 listY[2] = 220.0f;
+	 listY[5] = 420.0f;
+	 listY[8] = 600.0f;
 
+	 matrix = new int[9];
+	 moves = 0;
+	 
+	 for (int i = 0; i < 9; i++)
+	 {
+		 /*if (i < 8)
+		 {
+			 matrix[i] = i + 1;
+		 }
+		 else
+		 {
+			 matrix[i] = 0;
+		 }*/
+		 matrix[i] = 0;
+	 }
 
      mOne = new Texture("1.png");
      mOne->Parent(this);
@@ -29,54 +60,56 @@ Board::Board() {
      mTwo = new Texture("2.png");
      mTwo->Parent(this);
      mTwo->setter(2);
-     mTwo->Pos(Vector2(listX[1], listY[0]));
+     mTwo->Pos(Vector2(listX[1], listY[1]));
      mTwo->Scale(Vector2(0.2f, 0.2f));
 
      mThree = new Texture("3.png");
      mThree->Parent(this);
      mThree->setter(3);
-     mThree->Pos(Vector2(listX[2], listY[0]));
+     mThree->Pos(Vector2(listX[2], listY[2]));
      mThree->Scale(Vector2(0.1f, 0.1f));
 
      mFour = new Texture("4.png");
      mFour->Parent(this);
      mFour->setter(4);
-     mFour->Pos(Vector2(listX[0], listY[1]));
+     mFour->Pos(Vector2(listX[3], listY[3]));
      mFour->Scale(Vector2(0.1f, 0.1f));
 
      mFive = new Texture("5.png");
      mFive->Parent(this);
      mFive->setter(5);
-     mFive->Pos(Vector2(listX[1], listY[1]));
+     mFive->Pos(Vector2(listX[4], listY[4]));
      mFive->Scale(Vector2(0.1f, 0.1f));
 
      mSix = new Texture("6.png");
      mSix->Parent(this);
      mSix->setter(6);
-     mSix->Pos(Vector2(listX[2], listY[1]));
+     mSix->Pos(Vector2(listX[5], listY[5]));
      mSix->Scale(Vector2(0.1f, 0.1f));
 
      mSeven = new Texture("7.png");
      mSeven->Parent(this);
      mSeven->setter(7);
-     mSeven->Pos(Vector2(listX[0], listY[2]));
+     mSeven->Pos(Vector2(listX[6], listY[6]));
      mSeven->Scale(Vector2(0.1f, 0.1f));
 
      mEight = new Texture("8.png");
      mEight->Parent(this);
      mEight->setter(8);
-     mEight->Pos(Vector2(listX[1], listY[2]));
+     mEight->Pos(Vector2(listX[7], listY[7]));
      mEight->Scale(Vector2(0.1f, 0.1f));
 
      mEmpty = new Texture("9.png");
      mEmpty->Parent(this);
      mEmpty->setter(9);
-     mEmpty->Pos(Vector2(listX[2], listY[2]));
+     mEmpty->Pos(Vector2(listX[8], listY[8]));
      mEmpty->Scale(Vector2(0.0f, 0.0f));
+
 }
 
 Board::~Board() {
      mTimer = NULL;
+	 mInput = NULL;
 
      delete mOne;
      mOne = NULL;
@@ -109,7 +142,6 @@ Board::~Board() {
 void Board::Shuffle() {
      do
      {
-          matrix = new int[9];
           vector<int> list;
           int value;
           srand((unsigned)time(0));
@@ -126,6 +158,12 @@ void Board::Shuffle() {
           }
      } while (!isSolvable()); // if given matrix is an unsolvable solution, loop back and try again
 
+	 for (int i = 0; i < 9; i++)
+	 {
+		 cout << matrix[i] << endl;
+	 }
+
+	 output();
 }
 
 bool Board::isSolvable() // checks if the given matrix table is solvable using some linear algebra
@@ -200,6 +238,120 @@ bool Board::containsValue(vector<int> list, int value) // checks if the value is
      return false;
 }
 
+void Board::output()
+{
+
+	for (int i = 0; i < 9; i++)
+	{
+		switch (matrix[i])
+		{
+			case 1:
+			{
+				mOne->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 2:
+			{
+				mTwo->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 3:
+			{
+				mThree->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 4:
+			{
+				mFour->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 5:
+			{
+				mFive->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 6:
+			{
+				mSix->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 7:
+			{
+				mSeven->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 8:
+			{
+				mEight->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+			case 0:
+			{
+				mEmpty->Pos(Vector2(listX[i], listY[i]));
+				break;
+			}
+		}
+	}
+}
+
+void Board::shift(char m) // take in user input and shift the proper number into the blank spot
+{
+	int temp;
+
+	if (m == 'w') // move number up into blank spot
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			if (matrix[i] == 0)
+			{
+				temp = matrix[i + 3];
+				matrix[i + 3] = matrix[i];
+				matrix[i] = temp;
+				return;
+			}
+		}
+	}
+	if (m == 's') // move number down into blank spot
+	{
+		for (int i = 3; i < 9; i++)
+		{
+			if (matrix[i] == 0)
+			{
+				temp = matrix[i - 3];
+				matrix[i - 3] = matrix[i];
+				matrix[i] = temp;
+				return;
+			}
+		}
+	}
+	if (m == 'a') // move number left into blank spot
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			if (matrix[i] == 0 && (i + 1) % 3 != 0)
+			{
+				temp = matrix[i + 1];
+				matrix[i + 1] = matrix[i];
+				matrix[i] = temp;
+				return;
+			}
+		}
+	}
+	if (m == 'd') // move number right into blank spot
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			if (matrix[i] == 0 && i % 3 != 0)
+			{
+				temp = matrix[i - 1];
+				matrix[i - 1] = matrix[i];
+				matrix[i] = temp;
+				return;
+			}
+		}
+	}
+}
+
 bool Board::isValid() {
 
      for (int i = 0; i < 9; i++)
@@ -218,9 +370,52 @@ bool Board::isValid() {
      return true;
 }
 
+bool Board::newGame()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		if (matrix[i] != 0)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int Board::getMoves()
+{
+	return moves;
+}
 
 void Board::Update() {
+	if (mInput->KeyPressed(SDL_SCANCODE_DOWN) && !isValid())
+	{
+		shift('s');
+		output();
+		moves++;
+	}
+		
+	else if (mInput->KeyPressed(SDL_SCANCODE_UP) && !isValid())
+	{
+		shift('w');
+		output();
+		moves++;
+	}
 
+	else if (mInput->KeyPressed(SDL_SCANCODE_LEFT) && !isValid())
+	{
+		shift('a');
+		output();
+		moves++;
+	}
+
+	else if (mInput->KeyPressed(SDL_SCANCODE_RIGHT) && !isValid())
+	{
+		shift('d');
+		output();
+		moves++;
+	}
 }
 
 void Board::Render() {

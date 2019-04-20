@@ -63,7 +63,6 @@ namespace QuickSDL {
 	}
 
 	void Timer::Update() {
-
 		mElapsedTicks = SDL_GetTicks() - mStartTicks;
 		//Converting milliseconds to seconds
 		mDelataTime = mElapsedTicks * 0.001f;

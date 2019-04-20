@@ -2,6 +2,7 @@
 #define _SCREENMANAGER_H
 #include "StartScreen.h"
 #include "PlayScreen.h"
+#include "Board.h"
 
 
 class ScreenManager {

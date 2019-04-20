@@ -39,7 +39,7 @@ void ScreenManager::Update() {
      case start:
           mStartScreen->Update();
           if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {//once enter key is pressed reset the animation and go to the play screen
-               mCurrentScreen = play;
+			   mCurrentScreen = play;
                mStartScreen->ResetAnimation();
           }
           break;
@@ -48,6 +48,7 @@ void ScreenManager::Update() {
           mPlayScreen->Update();
           if (mInput->KeyPressed(SDL_SCANCODE_ESCAPE)) {//once ESC key is pressed go to the menu
                mCurrentScreen = start;
+			   mPlayScreen = new PlayScreen();
           }
 
           break;

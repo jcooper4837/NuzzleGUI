@@ -3,6 +3,10 @@
 #include "Timer.h"
 #include "Scoreboard.h"
 #include "AudioManager.h"
+#include <chrono>
+#include <sstream>
+#include <string>
+using namespace std::chrono;
 
 class PlaySideBar : public GameEntity {
 
@@ -14,12 +18,19 @@ private:
 
      Texture* mBestLabel;
      Texture* mCurrentLabel;
+	 Texture* mWin;
      Texture* mTable;
      Texture* mTitle;
+	 Texture* mTime;
 
-     Scoreboard* mBestScoreBoard;
+     Texture* mBestScoreBoard;
      Scoreboard* mCurrentScoreBoard;
     
+	 Uint32 startTime;
+	 Uint32 endTime;
+
+	 int best;
+	 std::stringstream time;
 
 public:
      PlaySideBar();
@@ -28,6 +39,18 @@ public:
      void SetBestMove(int Score);
 
      void SetCurrentMove(int Score);
+
+	 void youWin();
+
+	 void startTimer();
+
+	 void endTimer();
+
+	 Uint32 getTime();
+
+	 int getBest();
+
+	 void setBest(int b);
 
      void Update();
 

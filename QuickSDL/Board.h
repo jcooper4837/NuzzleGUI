@@ -3,6 +3,7 @@
 #include "Timer.h"
 #include "Texture.h"
 #include "InputManager.h"
+#include "Scoreboard.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,6 +16,7 @@ class Board : public GameEntity {
 
 private:
      Timer* mTimer;
+	 InputManager* mInput;
 
      Texture* mOne;
      Texture* mTwo;
@@ -27,6 +29,10 @@ private:
      Texture* mEmpty;
 
      int* matrix;
+	 float* listX;
+	 float* listY;
+	 int moves;
+	 
 
 public:
      Board();
@@ -36,9 +42,17 @@ public:
 
      bool isValid();
 
+	 bool newGame();
+
      bool containsValue(vector<int> list, int value);
 
      bool isSolvable();
+
+	 void output();
+
+	 void shift(char m);
+
+	 int getMoves();
 
      void Swap();
 

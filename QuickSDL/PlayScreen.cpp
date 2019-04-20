@@ -31,9 +31,31 @@ PlayScreen:: ~PlayScreen() {
 }
 
 void PlayScreen::Update() {
+	 
+	 if (mBoard->newGame())
+	 {
+		 mBoard->Shuffle();
+		 mSideBar->SetCurrentMove(0);
+		 mSideBar->SetBestMove(mSideBar->getBest());
+		 mSideBar->startTimer();
+	 }
+	 else if (mBoard->isValid())
+	 {
+		 if (mBoard->getMoves() < mSideBar->getBest())
+		 {
+			 mSideBar->SetBestMove(mBoard->getMoves());
+			 mSideBar->setBest(mBoard->getMoves());
+		 }
+		 mSideBar->youWin();
+	 }
+	 else if (!mBoard->isValid())
+	 {
+		 mSideBar->endTimer();
+	 }
+	 std::cout << mSideBar->getTime() << endl;
+	 mSideBar->SetCurrentMove(mBoard->getMoves());
      mSideBar->Update();
      mBoard->Update();
-     
 }
 
 
