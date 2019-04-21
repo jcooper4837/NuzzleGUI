@@ -168,6 +168,185 @@ void Board::Shuffle() {
 
 bool Board::isSolvable() // checks if the given matrix table is solvable using some linear algebra
 {
+	int list[9];
+	int inversions = 0;
+	int gridWidth = 9;
+	int row = 0;
+	int blankRow = 0;
+	int result;
+
+	for (int i = 0; i < (9); i++)
+	{
+		list[i] = matrix[i];
+		//cout << list[i] << endl;
+	}
+
+	__asm
+	{
+		mov esi, 0							;initialize i to 0 (in this code segment, i = esi, and j = ecx)
+		/* This code segment is meant to initialize list with values from matrix. It's currently non functional, so it's been omitted.
+		for1:
+			cmp esi, 9*4
+			jl next1
+			jmp endfor1
+
+			next1:
+				mov eax, matrix[esi]
+				mov list[esi], eax
+				add esi, 4
+				jmp for1
+
+		endfor1:
+			mov esi, 0
+		*/
+		for2:
+			cmp esi, 9*4					;loop condition
+			jl next2						;if i < 36, jump to next2
+			jmp endfor2						;else, jump to endfor2
+
+			next2:
+				mov eax, esi				;move i into eax
+				xor edx, edx				;clear edx
+				idiv gridWidth				;divide i by gridWidth
+
+			if1:
+				cmp edx, 0					;check remainder
+				je then1					;if i % gridWidth == 0, jump to then1
+				jmp endif1					;else, jump to endif1
+
+				then1:
+					inc row					;increment row
+
+			endif1:
+
+			if_2:							;find which row contains the blank element
+				cmp list[esi], 0			;compare list[i] and 0
+				je then2					;if list[i] == 0, jump to then2
+				jmp endif2					;else, jump to endif2
+
+				then2:
+					mov eax, row			;move row into eax
+					mov blankRow, eax		;move eax into blankRow
+
+			endif2:
+				mov ecx, esi				;move i into j
+				add ecx, 4					;increment j by 4
+
+			for3:
+				cmp ecx, 9*4				;loop condition
+				jl if3						;if j < 36, jump to if3
+				jmp endfor3					;else, jump to endfor3
+
+				if3:						;find the total number of inversions in list
+					mov eax, list[ecx]		;move list[j] into eax
+					cmp list[esi], eax		;compare list[i] to list[j]
+					jle endif3				;if list[i] <= list[j], jump to endif3
+
+				elseif3:
+					cmp list[ecx], 0		;compare list[j] to 0
+					jne then3				;if list[j] != 0, jump to then3
+					jmp endif3				;else, jump to endif3
+
+					then3:
+						inc inversions		;increment inversions
+
+				endif3:
+					add ecx, 4				;increment j by 4
+					jmp for3				;jump to for3
+
+			endfor3:
+				add esi, 4					;increment i by 4
+				jmp for2					;jump to for2
+
+		endfor2:
+			mov eax, gridWidth				;move gridWidth into eax
+			xor edx, edx					;clear edx
+			mov ebx, 2						;move 2 into ebx
+			idiv ebx						;divide gridWidth by 2
+
+		if4:								;check if number of rows is even (with the 3x3 game board, this will never be true, but this is left in for future purposes)
+			cmp edx, 0						;check for remainder
+			je then4						;if gridWidth % 2 == 0, jump to then4
+			jmp else4						;else, jump to else4
+
+			then4:
+				mov eax, blankRow			;move blankRow into eax
+				xor edx, edx				;clear edx
+				mov ebx, 2					;move 2 into ebx
+				idiv ebx					;divide blankRow by 2
+
+			if5:
+				cmp edx, 0					;check for remainder
+				je then5					;if blankRow % 2 == 0, jump to then5
+				jmp else5					;else, jump to else5
+
+				then5:
+					mov eax, inversions		;move inversions into eax
+					xor edx, edx			;clear edx
+					mov ebx, 2				;move 2 into ebx
+					idiv ebx				;divide inversions by 2
+								
+				if6:
+					cmp edx, 0				;check for remainder
+					je then6				;if inversions % 2 == 0, jump to then6
+					jmp else6				;else, jump to else6
+							
+					then6:
+						mov result, 0		;move 0 (true) into result
+						jmp endif6			;jump to endif6
+
+					else6:
+						mov result, 1		;move 1 (false) into result
+
+				endif6:
+					jmp endif4				;jump to endif4
+
+			else5:
+				mov eax, inversions			;move inversions into eax
+				xor edx, edx				;clear edx
+				mov ebx, 2					;move 2 into ebx
+				idiv ebx					;divide inversions by 2
+
+				if7:
+					cmp edx, 0				;check for remainder
+					jne then7				;if inversions % 2 != 0, jump to then7
+					jmp else7				;else, jump to else7
+
+					then7:
+						mov result, 0		;move 0 (true) into result
+						jmp endif7			;jump to endif7
+
+					else7:
+						mov result, 1		;move 1 (false) into result
+
+				endif7:
+					jmp endif4				;jump to endif4
+
+		else4:								;check if number of rows is odd (with a 3x3 board, should always be the case)
+			mov eax, inversions				;move inversions into eax
+			xor edx, edx					;clear edx
+			mov ebx, 2						;move 2 into ebx
+			idiv ebx						;divide inversions by 2
+
+			if8:
+				cmp edx, 0					;check for remainder
+				je then8					;if inversions % 2 == 0, jump to then8
+				jmp else8					;else, jump to else8
+
+				then8:
+					mov result, 0			;move 0 (true) into result
+					jmp endif8				;jump to endif8
+
+				else8:
+					mov result, 1			;move 1 (false) into result
+
+			endif8:
+
+		endif4:
+	};
+	//cout << inversions << endl;
+	return result % 2 == 0;
+	/* This code segment is the C++ variation of the above assembly code.
      int *list = new int[9];
      int count = 0;
 
@@ -216,7 +395,7 @@ bool Board::isSolvable() // checks if the given matrix table is solvable using s
      else
      {
           return parity % 2 == 0;
-     }
+     }*/
 }
 
 
