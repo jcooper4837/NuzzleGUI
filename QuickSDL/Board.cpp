@@ -160,7 +160,7 @@ void Board::Shuffle() {
 
 	 for (int i = 0; i < 9; i++)
 	 {
-		 cout << matrix[i] << endl;
+		 //cout << matrix[i] << endl;
 	 }
 
 	 output();

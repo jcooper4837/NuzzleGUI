@@ -2,6 +2,7 @@
 #define _SCREENMANAGER_H
 #include "StartScreen.h"
 #include "PlayScreen.h"
+#include "HowToPlay.h"
 #include "Board.h"
 
 
@@ -15,6 +16,7 @@ private:
 
      StartScreen* mStartScreen;
      PlayScreen* mPlayScreen;
+	 HowToPlay* mHowToPlay;
 
      SCREENS mCurrentScreen;
 

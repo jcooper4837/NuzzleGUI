@@ -4,6 +4,8 @@
 #include "Timer.h"
 #include "Texture.h"
 #include "InputManager.h"
+#include "PlaySideBar.h"
+#include <iostream>
 
 using namespace QuickSDL;
 
@@ -12,6 +14,7 @@ private:
      Timer* mTimer;
      InputManager* mInput;
 
+	 Texture* mScreen;
     
 public:
      HowToPlay();

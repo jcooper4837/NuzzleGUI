@@ -9,8 +9,8 @@ PlayScreen::PlayScreen() {
      mSideBar = new PlaySideBar();
      mSideBar->Parent(this);
      mSideBar->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH*0.09f, Graphics::Instance()->SCREEN_HEIGHT*0.05f));
-     mSideBar->SetBestMove(30);
-     mSideBar->SetCurrentMove(30);
+     mSideBar->SetBestMove(0);
+     mSideBar->SetCurrentMove(0);
      
      mBoard = new Board();
      mBoard->Parent(this);
@@ -52,7 +52,7 @@ void PlayScreen::Update() {
 	 {
 		 mSideBar->endTimer();
 	 }
-	 std::cout << mSideBar->getTime() << endl;
+	 //std::cout << mSideBar->getTime() << endl;
 	 mSideBar->SetCurrentMove(mBoard->getMoves());
      mSideBar->Update();
      mBoard->Update();

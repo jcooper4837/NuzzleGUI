@@ -43,7 +43,7 @@ PlaySideBar:: PlaySideBar() {
 
 	 mTime = new Texture("Time", "emulator.ttf", 28, { 150, 0, 0 });//prints Best on the left corner
 	 mTime->Parent(this);
-	 mTime->Pos(Vector2(25.0f, 380.0f));
+	 mTime->Pos(Vector2(-25000.0f, -38000.0f));
 
 }
 

@@ -20,6 +20,7 @@ ScreenManager::ScreenManager() {
      
      mStartScreen = new StartScreen();
      mPlayScreen = new PlayScreen();
+	 mHowToPlay = new HowToPlay();
      mCurrentScreen = start;
 
 }
@@ -31,6 +32,9 @@ ScreenManager::~ScreenManager() {
 
      delete mPlayScreen;
      mPlayScreen = NULL;
+
+	 delete mHowToPlay;
+	 mHowToPlay = NULL;
 }
 
 void ScreenManager::Update() {
@@ -39,8 +43,16 @@ void ScreenManager::Update() {
      case start:
           mStartScreen->Update();
           if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {//once enter key is pressed reset the animation and go to the play screen
-			   mCurrentScreen = play;
-               mStartScreen->ResetAnimation();
+			  if (mStartScreen->SelectedMode() == 0)
+			  {
+				  mCurrentScreen = play;
+				  mStartScreen->ResetAnimation();
+			  }
+			  else if (mStartScreen->SelectedMode() == 1)
+			  {
+				  mCurrentScreen = howToPlay;
+				  mStartScreen->ResetAnimation();
+			  }
           }
           break;
      
@@ -52,6 +64,13 @@ void ScreenManager::Update() {
           }
 
           break;
+
+	 case howToPlay:
+		 mHowToPlay->Update();
+		 if (mInput->KeyPressed(SDL_SCANCODE_ESCAPE)) {//once ESC key is pressed go to the menu
+			 mCurrentScreen = start;
+		 }
+		 break;
      }
 }
 void ScreenManager::Render() {
@@ -65,5 +84,8 @@ void ScreenManager::Render() {
           mPlayScreen->Render();
 
           break;
+
+	 case howToPlay:
+		  mHowToPlay->Render();
      }
 }
