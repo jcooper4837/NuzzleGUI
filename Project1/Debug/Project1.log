@@ -1,0 +1,10 @@
+﻿  Board.cpp
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(212): warning C4102: 'if1': unreferenced label
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(222): warning C4102: 'if_2': unreferenced label
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(245): warning C4102: 'elseif3': unreferenced label
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(267): warning C4102: 'if4': unreferenced label
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(278): warning C4102: 'if5': unreferenced label
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(289): warning C4102: 'if6': unreferenced label
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(310): warning C4102: 'if7': unreferenced label
+c:\users\jcoop\source\repos\project1\quicksdl\board.cpp(331): warning C4102: 'if8': unreferenced label
+  Project1.vcxproj -> C:\Users\jcoop\source\repos\Project1\Debug\Project1.exe

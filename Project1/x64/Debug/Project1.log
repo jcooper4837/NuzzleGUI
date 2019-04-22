@@ -1,0 +1,36 @@
+﻿  AnimatedTexture.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  AssetManager.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\assetmanager.h(13): fatal error C1083: Cannot open include file: 'SDL_mixer.h': No such file or directory
+  AudioManager.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\assetmanager.h(13): fatal error C1083: Cannot open include file: 'SDL_mixer.h': No such file or directory
+  Board.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  GameEntity.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\gameentity.cpp(56): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\gameentity.cpp(61): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  GameManager.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\assetmanager.h(13): fatal error C1083: Cannot open include file: 'SDL_mixer.h': No such file or directory
+  Graphics.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\graphics.h(15): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  HowToPlay.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  InputManager.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\inputmanager.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  main.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\assetmanager.h(13): fatal error C1083: Cannot open include file: 'SDL_mixer.h': No such file or directory
+  PlayScreen.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  PlaySideBar.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Scoreboard.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\assetmanager.h(13): fatal error C1083: Cannot open include file: 'SDL_mixer.h': No such file or directory
+  ScreenManager.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  StartScreen.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Texture.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\assetmanager.h(13): fatal error C1083: Cannot open include file: 'SDL_mixer.h': No such file or directory
+  Timer.cpp
+d:\downloads\nuzzlepuzzle-master\nuzzlepuzzle-master\quicksdl\timer.h(11): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Generating Code...
